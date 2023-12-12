@@ -34,7 +34,6 @@ jobs:
       - run: echo "Print value of USER3 is $USER3"
   test:
      runs-on: richard-devops
-     if: github.event_name == 'pull_request'
      environment: prod
      steps:
        - name: Checkout
