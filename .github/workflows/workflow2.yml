@@ -34,6 +34,7 @@ jobs:
       - run: echo "Print value of USER3 is $USER3"
   test:
      runs-on: richard-devops
+     if: github.event_name == 'pull_request'
      environment: prod
      steps:
        - name: Checkout
@@ -45,6 +46,7 @@ jobs:
           echo "Value for variable USER1 is ${{ vars.USER1 }} and SERVER1 is ${{ vars.SERVER1 }}"
           echo "password for env is ${{ secrets.token1 }} "
           echo " ${{ secrets.token1 }} " >> /tmp/richard-pass
+     
   deploy:
      runs-on: richard-devops
      steps:
