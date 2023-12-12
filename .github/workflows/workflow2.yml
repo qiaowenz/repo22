@@ -39,26 +39,30 @@ jobs:
      steps:
        - name: Checkout
          uses: actions/checkout@v4.1.1
-       - name: step 2
+       - name: step 2 run on Linux only
+         if: runner.os =='Linux'
          run: |
           ls -l
           echo "github repo name is ${{ GITHUB.REPOSITORY }} and branch name is ${{ GITHUB.REF_NAME }} "
           echo "Value for variable USER1 is ${{ vars.USER1 }} and SERVER1 is ${{ vars.SERVER1 }}"
           echo "password for env is ${{ secrets.token1 }} "
           echo " ${{ secrets.token1 }} " >> /tmp/richard-pass
+          echo "${{ runner.os }} "
      
   deploy:
      runs-on: richard-devops
      steps:
        - name: Checkout
          uses: actions/checkout@v4.1.1
-       - name: step 2
+       - name: step 2 only run on Windows
+         if: runner.os != 'Linux'
          run: |
           ls -l
           echo "github repo name is ${{ GITHUB.REPOSITORY }} and branch name is ${{ GITHUB.REF_NAME }} "
           echo " Value for user1 and servername are ${{ vars.user1 }} and ${{ vars.server_name }}"
           echo "password for env is ${{ secrets.token1 }} "
           echo " ${{ secrets.token1 }} " >> /tmp/richard-pass
+          echo " ${{ runner.os }} "
           cat /tmp/richard-pass
 
   
